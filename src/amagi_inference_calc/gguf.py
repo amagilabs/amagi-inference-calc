@@ -215,7 +215,7 @@ class GGUFInfo:
             "context_trained": self.arch_value("context_length"),
             "kv_bytes_per_token_f16": int(self.kv_bytes_per_token(2.0)),
             "mtp_layers": len(self.mtp_layers()),
-        "bytes_read_per_token_gb": round(self.bytes_read_per_token() / 1e9, 3),
+            "bytes_read_per_token_gb": round(self.bytes_read_per_token() / 1e9, 3),
         }
 
 
