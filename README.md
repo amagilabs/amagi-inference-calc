@@ -2,7 +2,7 @@
 
 Find out which GPU a small office needs to run a local LLM, how fast it will answer each person, and what that speed costs on the used market. It works out memory from the model's real layout and speed from memory bandwidth, using constants fitted on real llama.cpp runs. It comes as a command line tool and a web page.
 
-![demo](assets/demo.gif)
+![amagi-inference-calc estimating a 14B model on an RTX 3090, then ranking setups for a 10-person office](https://raw.githubusercontent.com/amagilabs/amagi-inference-calc/main/assets/demo.gif)
 
 ## Install
 
