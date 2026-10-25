@@ -1,0 +1,306 @@
+{
+ "_about": "Spec memory bandwidth from vendor spec sheets. Used prices are the lowest used offer listed on gpudojo.com (Amazon/eBay/Newegg listings), fetched 2026-10-25; they are asking prices, not sold prices, and move weekly. Override with --price or --prices FILE.",
+ "price_date": "2026-10-25",
+ "gpus": [
+  {
+   "id": "rtx-3060-12gb",
+   "name": "GeForce RTX 3060 12GB",
+   "vendor": "nvidia",
+   "kind": "discrete",
+   "vram_gb": 12,
+   "bw_spec_gbs": 360,
+   "price_used_usd": 330,
+   "price_source": "https://gpudojo.com/rtx-3060-12gb"
+  },
+  {
+   "id": "rtx-3060-ti",
+   "name": "GeForce RTX 3060 Ti 8GB",
+   "vendor": "nvidia",
+   "kind": "discrete",
+   "vram_gb": 8,
+   "bw_spec_gbs": 448,
+   "price_used_usd": 260,
+   "price_source": "https://gpudojo.com/rtx-3060-ti"
+  },
+  {
+   "id": "rtx-3070-ti",
+   "name": "GeForce RTX 3070 Ti 8GB",
+   "vendor": "nvidia",
+   "kind": "discrete",
+   "vram_gb": 8,
+   "bw_spec_gbs": 608,
+   "price_used_usd": 300,
+   "price_source": "https://gpudojo.com/rtx-3070-ti"
+  },
+  {
+   "id": "rtx-3080",
+   "name": "GeForce RTX 3080 10GB",
+   "vendor": "nvidia",
+   "kind": "discrete",
+   "vram_gb": 10,
+   "bw_spec_gbs": 760,
+   "price_used_usd": 389,
+   "price_source": "https://gpudojo.com/rtx-3080"
+  },
+  {
+   "id": "rtx-3090",
+   "name": "GeForce RTX 3090 24GB",
+   "vendor": "nvidia",
+   "kind": "discrete",
+   "vram_gb": 24,
+   "bw_spec_gbs": 936,
+   "price_used_usd": 1399,
+   "price_source": "https://gpudojo.com/rtx-3090",
+   "bw_measured_gbs": 737.8,
+   "bw_measured_note": "memtest_vulkan 0.6.0 steady-state 'checked' rate, median of 30 samples per card on two cards (739.3 and 736.2 GB/s), 2026-10-21"
+  },
+  {
+   "id": "rtx-3090-ti",
+   "name": "GeForce RTX 3090 Ti 24GB",
+   "vendor": "nvidia",
+   "kind": "discrete",
+   "vram_gb": 24,
+   "bw_spec_gbs": 1008,
+   "price_used_usd": 1700,
+   "price_source": "https://gpudojo.com/rtx-3090-ti"
+  },
+  {
+   "id": "rtx-4060-ti-16gb",
+   "name": "GeForce RTX 4060 Ti 16GB",
+   "vendor": "nvidia",
+   "kind": "discrete",
+   "vram_gb": 16,
+   "bw_spec_gbs": 288,
+   "price_used_usd": 680,
+   "price_source": "https://gpudojo.com/rtx-4060-ti-16gb"
+  },
+  {
+   "id": "rtx-4070-ti-super",
+   "name": "GeForce RTX 4070 Ti Super 16GB",
+   "vendor": "nvidia",
+   "kind": "discrete",
+   "vram_gb": 16,
+   "bw_spec_gbs": 672,
+   "price_used_usd": 925,
+   "price_source": "https://gpudojo.com/rtx-4070-ti-super"
+  },
+  {
+   "id": "rtx-4080",
+   "name": "GeForce RTX 4080 16GB",
+   "vendor": "nvidia",
+   "kind": "discrete",
+   "vram_gb": 16,
+   "bw_spec_gbs": 716.8,
+   "price_used_usd": 999,
+   "price_source": "https://gpudojo.com/rtx-4080"
+  },
+  {
+   "id": "rtx-4080-super",
+   "name": "GeForce RTX 4080 Super 16GB",
+   "vendor": "nvidia",
+   "kind": "discrete",
+   "vram_gb": 16,
+   "bw_spec_gbs": 736,
+   "price_used_usd": 1195,
+   "price_source": "https://gpudojo.com/rtx-4080-super"
+  },
+  {
+   "id": "rtx-4090",
+   "name": "GeForce RTX 4090 24GB",
+   "vendor": "nvidia",
+   "kind": "discrete",
+   "vram_gb": 24,
+   "bw_spec_gbs": 1008,
+   "price_used_usd": 3800,
+   "price_source": "https://gpudojo.com/rtx-4090"
+  },
+  {
+   "id": "rtx-5060-ti-16gb",
+   "name": "GeForce RTX 5060 Ti 16GB",
+   "vendor": "nvidia",
+   "kind": "discrete",
+   "vram_gb": 16,
+   "bw_spec_gbs": 448,
+   "price_used_usd": 699,
+   "price_source": "https://gpudojo.com/rtx-5060-ti-16gb"
+  },
+  {
+   "id": "rtx-5070-ti",
+   "name": "GeForce RTX 5070 Ti 16GB",
+   "vendor": "nvidia",
+   "kind": "discrete",
+   "vram_gb": 16,
+   "bw_spec_gbs": 896,
+   "price_used_usd": 1150,
+   "price_source": "https://gpudojo.com/rtx-5070-ti"
+  },
+  {
+   "id": "rtx-5090",
+   "name": "GeForce RTX 5090 32GB",
+   "vendor": "nvidia",
+   "kind": "discrete",
+   "vram_gb": 32,
+   "bw_spec_gbs": 1792,
+   "price_used_usd": 6800,
+   "price_source": "https://gpudojo.com/rtx-5090"
+  },
+  {
+   "id": "tesla-p40",
+   "name": "Tesla P40 24GB",
+   "vendor": "nvidia",
+   "kind": "discrete",
+   "vram_gb": 24,
+   "bw_spec_gbs": 347,
+   "price_used_usd": 345,
+   "price_source": "https://gpudojo.com/tesla-p40"
+  },
+  {
+   "id": "rtx-a4000",
+   "name": "RTX A4000 16GB",
+   "vendor": "nvidia",
+   "kind": "discrete",
+   "vram_gb": 16,
+   "bw_spec_gbs": 448,
+   "price_used_usd": 850,
+   "price_source": "https://gpudojo.com/a4000"
+  },
+  {
+   "id": "rtx-a5000",
+   "name": "RTX A5000 24GB",
+   "vendor": "nvidia",
+   "kind": "discrete",
+   "vram_gb": 24,
+   "bw_spec_gbs": 768,
+   "price_used_usd": 2300,
+   "price_source": "https://gpudojo.com/a5000"
+  },
+  {
+   "id": "rtx-a6000",
+   "name": "RTX A6000 48GB",
+   "vendor": "nvidia",
+   "kind": "discrete",
+   "vram_gb": 48,
+   "bw_spec_gbs": 768,
+   "price_used_usd": 4350,
+   "price_source": "https://gpudojo.com/a6000"
+  },
+  {
+   "id": "rx-6600-xt",
+   "name": "Radeon RX 6600 XT 8GB",
+   "vendor": "amd",
+   "kind": "discrete",
+   "vram_gb": 8,
+   "bw_spec_gbs": 256,
+   "price_used_usd": 250,
+   "price_source": "https://gpudojo.com/rx-6600-xt"
+  },
+  {
+   "id": "rx-6700-xt",
+   "name": "Radeon RX 6700 XT 12GB",
+   "vendor": "amd",
+   "kind": "discrete",
+   "vram_gb": 12,
+   "bw_spec_gbs": 384,
+   "price_used_usd": 335,
+   "price_source": "https://gpudojo.com/rx-6700-xt"
+  },
+  {
+   "id": "rx-6800",
+   "name": "Radeon RX 6800 16GB",
+   "vendor": "amd",
+   "kind": "discrete",
+   "vram_gb": 16,
+   "bw_spec_gbs": 512,
+   "price_used_usd": 400,
+   "price_source": "https://gpudojo.com/rx-6800"
+  },
+  {
+   "id": "rx-6800-xt",
+   "name": "Radeon RX 6800 XT 16GB",
+   "vendor": "amd",
+   "kind": "discrete",
+   "vram_gb": 16,
+   "bw_spec_gbs": 512,
+   "price_used_usd": 400,
+   "price_source": "https://gpudojo.com/rx-6800-xt"
+  },
+  {
+   "id": "rx-7900-xtx",
+   "name": "Radeon RX 7900 XTX 24GB",
+   "vendor": "amd",
+   "kind": "discrete",
+   "vram_gb": 24,
+   "bw_spec_gbs": 960,
+   "price_used_usd": 1049,
+   "price_source": "https://gpudojo.com/rx-7900-xtx"
+  },
+  {
+   "id": "arc-a770-16gb",
+   "name": "Arc A770 16GB",
+   "vendor": "intel",
+   "kind": "discrete",
+   "vram_gb": 16,
+   "bw_spec_gbs": 560,
+   "price_used_usd": 299,
+   "price_source": "https://gpudojo.com/arc-a770-16gb"
+  },
+  {
+   "id": "arc-b580",
+   "name": "Arc B580 12GB",
+   "vendor": "intel",
+   "kind": "discrete",
+   "vram_gb": 12,
+   "bw_spec_gbs": 456,
+   "price_used_usd": 400,
+   "price_source": "https://gpudojo.com/arc-b580"
+  },
+  {
+   "id": "apple-m4-pro-64gb",
+   "name": "Apple M4 Pro, 64GB unified",
+   "vendor": "apple",
+   "kind": "unified",
+   "vram_gb": 48,
+   "memory_gb": 64,
+   "bw_spec_gbs": 273,
+   "price_used_usd": null,
+   "price_source": null,
+   "vram_note": "75% of unified memory treated as usable by the GPU (assumption; OS limits vary)"
+  },
+  {
+   "id": "apple-m4-max-128gb",
+   "name": "Apple M4 Max, 128GB unified",
+   "vendor": "apple",
+   "kind": "unified",
+   "vram_gb": 96,
+   "memory_gb": 128,
+   "bw_spec_gbs": 546,
+   "price_used_usd": null,
+   "price_source": null,
+   "vram_note": "75% of unified memory treated as usable by the GPU (assumption; OS limits vary)"
+  },
+  {
+   "id": "apple-m3-ultra-256gb",
+   "name": "Apple M3 Ultra, 256GB unified",
+   "vendor": "apple",
+   "kind": "unified",
+   "vram_gb": 192,
+   "memory_gb": 256,
+   "bw_spec_gbs": 819,
+   "price_used_usd": null,
+   "price_source": null,
+   "vram_note": "75% of unified memory treated as usable by the GPU (assumption; OS limits vary)"
+  },
+  {
+   "id": "ryzen-ai-max-395-128gb",
+   "name": "AMD Ryzen AI Max+ 395, 128GB unified",
+   "vendor": "amd",
+   "kind": "unified",
+   "vram_gb": 96,
+   "memory_gb": 128,
+   "bw_spec_gbs": 256,
+   "price_used_usd": null,
+   "price_source": null,
+   "vram_note": "75% of unified memory treated as usable by the GPU (assumption; OS limits vary)"
+  }
+ ]
+}
