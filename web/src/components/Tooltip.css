@@ -1,32 +1,68 @@
-.info-icon {
-  margin-left: 0.5rem;
-  background-color: var(--accent-color);
-  color: #fff;
-  display: inline-block;
-  text-align: center;
-  line-height: 1rem;
-  border-radius: 50%;
-  font-size: 0.75rem;
-  width: 1rem;
-  height: 1rem;
-  cursor: pointer;
+.info-btn {
   position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  margin: -4px 0 -4px 2px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted);
+  cursor: help;
+  vertical-align: middle;
+  transition: color var(--dur) var(--ease);
 }
 
-.info-icon .tooltip-text {
-  display: none;
+/* 44px hit area around a 24px button */
+.info-btn::after {
+  content: '';
   position: absolute;
-  background-color: #333;
-  color: #fff;
-  padding: 0.25rem;
-  font-size: 0.75rem;
-  border-radius: 4px;
-  top: 1.5rem;
-  left: 0;
-  width: 200px;
-  z-index: 999;
+  inset: -10px;
 }
 
-.info-icon:hover .tooltip-text {
-  display: block;
+.info-btn:hover,
+.info-btn[aria-expanded='true'] {
+  color: var(--accent);
+}
+
+.tooltip {
+  position: fixed;
+  z-index: var(--z-tooltip);
+  max-width: min(18rem, calc(100vw - 16px));
+  padding: 0.6rem 0.75rem;
+  border-radius: var(--radius-sm);
+  background: var(--tip-bg);
+  color: var(--tip-ink);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.45;
+  box-shadow: var(--shadow-pop);
+  pointer-events: none;
+  animation: tip-in 140ms var(--ease) both;
+}
+
+@keyframes tip-in {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+}
+
+.tooltip--below {
+  animation-name: tip-in-below;
+}
+
+@keyframes tip-in-below {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tooltip {
+    animation: none;
+  }
 }

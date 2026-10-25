@@ -107,9 +107,20 @@ export const KV_BYTES: Record<string, number> = {
 };
 
 const ALIASES: Record<string, string> = {
-  Q4: 'Q4_K_M', Q5: 'Q5_K_M', Q6: 'Q6_K', Q8: 'Q8_0', Q3: 'Q3_K_M',
-  Q2: 'Q2_K', FP16: 'F16', FP32: 'F32', INT8: 'Q8_0', INT4: 'Q4_K_M',
-  Q4_K: 'Q4_K_M', Q5_K: 'Q5_K_M', Q3_K: 'Q3_K_M', MXFP4_MOE: 'MXFP4',
+  Q4: 'Q4_K_M',
+  Q5: 'Q5_K_M',
+  Q6: 'Q6_K',
+  Q8: 'Q8_0',
+  Q3: 'Q3_K_M',
+  Q2: 'Q2_K',
+  FP16: 'F16',
+  FP32: 'F32',
+  INT8: 'Q8_0',
+  INT4: 'Q4_K_M',
+  Q4_K: 'Q4_K_M',
+  Q5_K: 'Q5_K_M',
+  Q3_K: 'Q3_K_M',
+  MXFP4_MOE: 'MXFP4',
 };
 
 export function normalizeQuant(name: string): string {
@@ -149,7 +160,11 @@ function expertUnion(m: ModelSpec, streams: number): number {
   return 1.0 - (1.0 - p) ** Math.max(1, streams);
 }
 
-export function readBytesPerStep(m: ModelSpec, quant: string, streams = 1): number {
+export function readBytesPerStep(
+  m: ModelSpec,
+  quant: string,
+  streams = 1
+): number {
   const bpw = QUANT_BPW[normalizeQuant(quant)] / 8;
   if (isExact(m, quant) && m.read_bytes) {
     if (streams > 1 && m.experts_total) {
@@ -165,9 +180,11 @@ export function readBytesPerStep(m: ModelSpec, quant: string, streams = 1): numb
 }
 
 export function kvBytes(m: ModelSpec, context: number, kvType = 'F16'): number {
-  const perLayerTok = m.kv_heads * (m.head_dim_k + m.head_dim_v) * KV_BYTES[kvType];
+  const perLayerTok =
+    m.kv_heads * (m.head_dim_k + m.head_dim_v) * KV_BYTES[kvType];
   const full = m.full_attn_layers * perLayerTok * context;
-  const windowed = m.window_attn_layers * perLayerTok * Math.min(context, m.window || context);
+  const windowed =
+    m.window_attn_layers * perLayerTok * Math.min(context, m.window || context);
   return full + windowed;
 }
 
@@ -182,13 +199,21 @@ function fmtG(x: number): string {
 }
 
 export function bandwidth(gpu: GPU, cal: Calibration): [number, string] {
-  if (gpu.bw_decode_gbs) return [gpu.bw_decode_gbs * 1e9, 'fitted from your benchmark run'];
-  if (gpu.id === cal.gpu) return [cal.bw_eff_gbs * 1e9, 'calibrated on this GPU'];
+  if (gpu.bw_decode_gbs)
+    return [gpu.bw_decode_gbs * 1e9, 'fitted from your benchmark run'];
+  if (gpu.id === cal.gpu)
+    return [cal.bw_eff_gbs * 1e9, 'calibrated on this GPU'];
   if (gpu.bw_measured_gbs) {
     const scale = cal.bw_eff_gbs / cal.bw_ref_gbs;
-    return [gpu.bw_measured_gbs * scale * 1e9, `memtest ${fmtG(gpu.bw_measured_gbs)} GB/s x ${scale.toFixed(2)}`];
+    return [
+      gpu.bw_measured_gbs * scale * 1e9,
+      `memtest ${fmtG(gpu.bw_measured_gbs)} GB/s x ${scale.toFixed(2)}`,
+    ];
   }
-  return [gpu.bw_spec_gbs * decodeEff(cal) * 1e9, `spec x ${decodeEff(cal).toFixed(2)}`];
+  return [
+    gpu.bw_spec_gbs * decodeEff(cal) * 1e9,
+    `spec x ${decodeEff(cal).toFixed(2)}`,
+  ];
 }
 
 function moeLayers(m: ModelSpec): number {
@@ -199,16 +224,29 @@ export function attentionFlops(m: ModelSpec, prompt: number): number {
   const width = (m.attn_heads * (m.head_dim_k + m.head_dim_v)) / 2;
   const full = 2.0 * prompt * prompt * width * m.full_attn_layers;
   const w = m.window ? Math.min(prompt, m.window) : prompt;
-  const windowed = 4.0 * prompt * w * width * m.window_attn_layers * (w === prompt ? 0.5 : 1.0);
+  const windowed =
+    4.0 *
+    prompt *
+    w *
+    width *
+    m.window_attn_layers *
+    (w === prompt ? 0.5 : 1.0);
   return full + windowed;
 }
 
 export function decodeStepS(
-  m: ModelSpec, quant: string, context: number, streams: number, bw: number,
-  cal: Calibration, kvType = 'F16'
+  m: ModelSpec,
+  quant: string,
+  context: number,
+  streams: number,
+  bw: number,
+  cal: Calibration,
+  kvType = 'F16'
 ): number {
-  const mem = readBytesPerStep(m, quant, streams) + streams * kvBytes(m, context, kvType);
-  let t = mem / bw + cal.overhead_ms / 1e3 + (cal.moe_layer_ms / 1e3) * moeLayers(m);
+  const mem =
+    readBytesPerStep(m, quant, streams) + streams * kvBytes(m, context, kvType);
+  let t =
+    mem / bw + cal.overhead_ms / 1e3 + (cal.moe_layer_ms / 1e3) * moeLayers(m);
   const perStream = m.experts_total
     ? cal.batch_ms_per_layer_moe * moeLayers(m)
     : (cal.batch_ms_per_b_dense * activeParams(m)) / 1e9;
@@ -216,9 +254,17 @@ export function decodeStepS(
   return t;
 }
 
-export function prefillS(m: ModelSpec, prompt: number, tflopsDense: number, tflopsMoe?: number): number {
+export function prefillS(
+  m: ModelSpec,
+  prompt: number,
+  tflopsDense: number,
+  tflopsMoe?: number
+): number {
   const linF = (m.experts_total && tflopsMoe ? tflopsMoe : tflopsDense) * 1e12;
-  return (2.0 * activeParams(m) * prompt) / linF + attentionFlops(m, prompt) / (tflopsDense * 1e12);
+  return (
+    (2.0 * activeParams(m) * prompt) / linF +
+    attentionFlops(m, prompt) / (tflopsDense * 1e12)
+  );
 }
 
 export interface Estimate {
@@ -260,12 +306,18 @@ export interface EstimateOptions {
   price?: number | null;
 }
 
-export function estimate(model: ModelSpec, gpu: GPU, cal: Calibration, o: EstimateOptions = {}): Estimate {
+export function estimate(
+  model: ModelSpec,
+  gpu: GPU,
+  cal: Calibration,
+  o: EstimateOptions = {}
+): Estimate {
   const quant = o.quant || model.native_quant || 'Q4_K_M';
   const users = Math.max(1, Math.trunc(o.users ?? 1));
   const gpuCount = Math.max(1, Math.trunc(o.gpuCount ?? 1));
   const context = o.context ?? 8192;
-  const prompt = o.prompt == null ? Math.floor(context / 2) : Math.min(o.prompt, context);
+  const prompt =
+    o.prompt == null ? Math.floor(context / 2) : Math.min(o.prompt, context);
   const kvType = o.kvType ?? 'F16';
   const warnings: string[] = [];
 
@@ -276,9 +328,12 @@ export function estimate(model: ModelSpec, gpu: GPU, cal: Calibration, o: Estima
   const total = vram * gpuCount;
   const fits = need <= total;
   const perCard = vram - RUNTIME_OVERHEAD_GIB * GIB;
-  const cards = perCard > 0 ? Math.max(1, Math.ceil((weights + kv) / perCard)) : 0;
+  const cards =
+    perCard > 0 ? Math.max(1, Math.ceil((weights + kv) / perCard)) : 0;
   if (model.context_max && context > model.context_max) {
-    warnings.push(`context ${context} is above the model's trained ${model.context_max}`);
+    warnings.push(
+      `context ${context} is above the model's trained ${model.context_max}`
+    );
   }
   if (!fits) {
     warnings.push(
@@ -286,7 +341,9 @@ export function estimate(model: ModelSpec, gpu: GPU, cal: Calibration, o: Estima
     );
   }
   if (gpuCount > 1) {
-    warnings.push('multi-GPU assumes llama.cpp layer split: memory adds up, speed does not (cards take turns)');
+    warnings.push(
+      'multi-GPU assumes llama.cpp layer split: memory adds up, speed does not (cards take turns)'
+    );
   }
   if (gpu.note) warnings.push(gpu.note);
   if (['amd', 'intel', 'apple'].includes(gpu.vendor)) {
@@ -297,9 +354,14 @@ export function estimate(model: ModelSpec, gpu: GPU, cal: Calibration, o: Estima
 
   const [bw, bwSrc] = bandwidth(gpu, cal);
   const single = 1.0 / decodeStepS(model, quant, prompt, 1, bw, cal, kvType);
-  const perUser = 1.0 / decodeStepS(model, quant, prompt, users, bw, cal, kvType);
+  const perUser =
+    1.0 / decodeStepS(model, quant, prompt, users, bw, cal, kvType);
 
-  const flops = o.tflops ? o.tflops : gpu.id === cal.gpu ? cal.tflops_dense : gpu.tflops;
+  const flops = o.tflops
+    ? o.tflops
+    : gpu.id === cal.gpu
+      ? cal.tflops_dense
+      : gpu.tflops;
   let pp: number | null = null;
   let ttft: number | null = null;
   let ttftAll: number | null = null;
@@ -311,26 +373,56 @@ export function estimate(model: ModelSpec, gpu: GPU, cal: Calibration, o: Estima
     ttftAll = tPp * users;
   }
 
-  const price = o.price === undefined || o.price === null ? (gpu.price_used_usd ?? null) : o.price;
+  const price =
+    o.price === undefined || o.price === null
+      ? (gpu.price_used_usd ?? null)
+      : o.price;
   const totalPrice = price !== null ? price * gpuCount : null;
   const usd = totalPrice && fits ? totalPrice / (perUser * users) : null;
-  if (users > 8) warnings.push('more than 8 users is beyond the measured range (1-8 streams)');
+  if (users > 8)
+    warnings.push(
+      'more than 8 users is beyond the measured range (1-8 streams)'
+    );
 
   return {
-    model: model.id, quant, gpu: gpu.id, gpu_count: gpuCount, users, context, kv_type: kvType,
-    weights_gib: weights / GIB, kv_gib: kv / GIB, vram_needed_gib: need / GIB,
-    vram_total_gib: total / GIB, fits, cards_needed: cards,
-    bandwidth_gbs: bw / 1e9, bandwidth_source: bwSrc,
-    tok_s_single: single, tok_s_per_user: perUser, tok_s_total: perUser * users,
-    prefill_tok_s: pp, ttft_s: ttft, ttft_all_s: ttftAll, prompt,
-    price_usd: totalPrice, usd_per_tok_s: usd, warnings,
+    model: model.id,
+    quant,
+    gpu: gpu.id,
+    gpu_count: gpuCount,
+    users,
+    context,
+    kv_type: kvType,
+    weights_gib: weights / GIB,
+    kv_gib: kv / GIB,
+    vram_needed_gib: need / GIB,
+    vram_total_gib: total / GIB,
+    fits,
+    cards_needed: cards,
+    bandwidth_gbs: bw / 1e9,
+    bandwidth_source: bwSrc,
+    tok_s_single: single,
+    tok_s_per_user: perUser,
+    tok_s_total: perUser * users,
+    prefill_tok_s: pp,
+    ttft_s: ttft,
+    ttft_all_s: ttftAll,
+    prompt,
+    price_usd: totalPrice,
+    usd_per_tok_s: usd,
+    warnings,
   };
 }
 
 // -- cli.py `office` -----------------------------------------------------------
 
 export const OFFICE_MODELS = [
-  'qwen3-8b', 'qwen3-14b', 'gpt-oss-20b', 'gemma-3-27b', 'qwen3-30b-a3b', 'qwen3-32b', 'llama-3.3-70b',
+  'qwen3-8b',
+  'qwen3-14b',
+  'gpt-oss-20b',
+  'gemma-3-27b',
+  'qwen3-30b-a3b',
+  'qwen3-32b',
+  'llama-3.3-70b',
 ];
 
 export interface OfficeOptions {
@@ -350,7 +442,10 @@ export interface OfficePick extends Estimate {
 /** Cheapest setups per model that fit and give each user at least minTokS. */
 export function officePicks(
   preset: Pick<OfficePreset, 'users' | 'context' | 'prompt'>,
-  models: ModelSpec[], gpus: GPU[], cal: Calibration, o: OfficeOptions = {}
+  models: ModelSpec[],
+  gpus: GPU[],
+  cal: Calibration,
+  o: OfficeOptions = {}
 ): Record<string, OfficePick[]> {
   const minTokS = o.minTokS ?? 15;
   const maxCards = o.maxCards ?? 4;
@@ -363,12 +458,17 @@ export function officePicks(
     for (const g of pool) {
       for (let n = 1; n <= (g.kind === 'unified' ? 1 : maxCards); n++) {
         const e = estimate(m, g, cal, {
-          users: preset.users, context: preset.context, prompt: preset.prompt,
-          gpuCount: n, price: prices[g.id],
+          users: preset.users,
+          context: preset.context,
+          prompt: preset.prompt,
+          gpuCount: n,
+          price: prices[g.id],
         });
         if (!e.fits) continue;
         if (e.tok_s_per_user >= minTokS) {
-          const caveat = e.warnings.some((w) => !w.startsWith('multi-GPU') && !w.startsWith('more than 8'));
+          const caveat = e.warnings.some(
+            (w) => !w.startsWith('multi-GPU') && !w.startsWith('more than 8')
+          );
           rows.push({ ...e, model_name: m.name, gpu_name: g.name, caveat });
         }
         break; // more cards never makes a layer split faster
@@ -376,7 +476,8 @@ export function officePicks(
     }
   }
   rows.sort((a, b) => {
-    const pa = a.price_usd, pb = b.price_usd;
+    const pa = a.price_usd,
+      pb = b.price_usd;
     if ((pa === null) !== (pb === null)) return pa === null ? 1 : -1;
     if ((pa ?? 0) !== (pb ?? 0)) return (pa ?? 0) - (pb ?? 0);
     return b.tok_s_per_user - a.tok_s_per_user;
