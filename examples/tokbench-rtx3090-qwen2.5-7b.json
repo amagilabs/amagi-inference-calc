@@ -1,0 +1,225 @@
+{
+  "tool": "amagi-tokbench",
+  "tool_version": "0.1.0",
+  "created": "2026-10-24T15:36:08Z",
+  "label": "RTX 3090 24 GB, all layers on GPU (-ngl 99)",
+  "backend": {
+    "kind": "llamacpp",
+    "name": "llama.cpp server",
+    "model": "Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+    "owned_by": "llamacpp",
+    "quant": "Q4_K_M",
+    "version": "b11753-d8d92973c",
+    "model_file": "Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+    "context": 8192,
+    "slots": 4
+  },
+  "vram": {
+    "gpus": [
+      {
+        "index": 0,
+        "name": "NVIDIA GeForce RTX 3090",
+        "total_mib": 24576.0,
+        "start_mib": 5098.0,
+        "peak_mib": 5098.0
+      }
+    ],
+    "peak_mib": 5098.0,
+    "total_mib": 24576.0,
+    "samples": 68,
+    "source": "nvidia-smi (custom command)"
+  },
+  "settings": {
+    "prompt_set": "v1",
+    "prompt_set_hash": "sha256:f8187fc0240defb6",
+    "runs": 3,
+    "warmup": 1,
+    "temperature": 0,
+    "seed": 42,
+    "timing": "client-side, streamed"
+  },
+  "cases": [
+    {
+      "name": "short",
+      "description": "short chat prompt, long answer: generation speed",
+      "max_tokens": 256,
+      "runs": [
+        {
+          "ttft_s": 0.030078299983870238,
+          "gen_s": 1.7971287000109442,
+          "total_s": 1.8274307000101544,
+          "gen_tokens": 256,
+          "prompt_tokens": 70,
+          "token_source": "usage",
+          "server_pp_tps": 3151.3077927339846,
+          "server_gen_tps": 142.46512526079187,
+          "finish_reason": "length",
+          "text_chars": 1218,
+          "pp_tps": 2327.259188103654,
+          "gen_tps": 141.89300966505465
+        },
+        {
+          "ttft_s": 0.038106299994979054,
+          "gen_s": 1.7975874999538064,
+          "total_s": 1.8358384000021033,
+          "gen_tokens": 256,
+          "prompt_tokens": 68,
+          "token_source": "usage",
+          "server_pp_tps": 3212.699612586223,
+          "server_gen_tps": 142.2861719517272,
+          "finish_reason": "length",
+          "text_chars": 1210,
+          "pp_tps": 1784.4818313234239,
+          "gen_tps": 141.85679417917228
+        },
+        {
+          "ttft_s": 0.037532899994403124,
+          "gen_s": 1.8010744000202976,
+          "total_s": 1.838803899998311,
+          "gen_tokens": 256,
+          "prompt_tokens": 70,
+          "token_source": "usage",
+          "server_pp_tps": 3258.5420351922544,
+          "server_gen_tps": 142.08858001890445,
+          "finish_reason": "length",
+          "text_chars": 1219,
+          "pp_tps": 1865.0304135954948,
+          "gen_tps": 141.58215784818563
+        }
+      ],
+      "median": {
+        "prompt_tokens": 70,
+        "gen_tokens": 256,
+        "ttft_ms": 37.532899994403124,
+        "pp_tps": 1865.0304135954948,
+        "gen_tps": 141.85679417917228,
+        "server_pp_tps": 3212.699612586223,
+        "server_gen_tps": 142.2861719517272
+      }
+    },
+    {
+      "name": "medium",
+      "description": "about 600 prompt tokens: everyday chat with context",
+      "max_tokens": 128,
+      "runs": [
+        {
+          "ttft_s": 0.1498231000150554,
+          "gen_s": 0.9012697000289336,
+          "total_s": 1.0512396999984048,
+          "gen_tokens": 128,
+          "prompt_tokens": 637,
+          "token_source": "usage",
+          "server_pp_tps": 5056.077214315763,
+          "server_gen_tps": 142.03473637021355,
+          "finish_reason": "length",
+          "text_chars": 599,
+          "pp_tps": 4251.680815147926,
+          "gen_tps": 140.91231514376096
+        },
+        {
+          "ttft_s": 0.15417579998029396,
+          "gen_s": 0.903482099995017,
+          "total_s": 1.0578391999588348,
+          "gen_tokens": 128,
+          "prompt_tokens": 637,
+          "token_source": "usage",
+          "server_pp_tps": 5002.945218927941,
+          "server_gen_tps": 141.8449147489899,
+          "finish_reason": "length",
+          "text_chars": 599,
+          "pp_tps": 4131.647120244671,
+          "gen_tps": 140.5672563968898
+        },
+        {
+          "ttft_s": 0.161331599985715,
+          "gen_s": 0.9008426999789663,
+          "total_s": 1.0623083999962546,
+          "gen_tokens": 128,
+          "prompt_tokens": 637,
+          "token_source": "usage",
+          "server_pp_tps": 5120.990433314575,
+          "server_gen_tps": 142.02386222797716,
+          "finish_reason": "length",
+          "text_chars": 610,
+          "pp_tps": 3948.389528501563,
+          "gen_tps": 140.97910767658473
+        }
+      ],
+      "median": {
+        "prompt_tokens": 637,
+        "gen_tokens": 128,
+        "ttft_ms": 154.17579998029396,
+        "pp_tps": 4131.647120244671,
+        "gen_tps": 140.91231514376096,
+        "server_pp_tps": 5056.077214315763,
+        "server_gen_tps": 142.02386222797716
+      }
+    },
+    {
+      "name": "long",
+      "description": "about 2,500 prompt tokens: prompt processing speed",
+      "max_tokens": 128,
+      "runs": [
+        {
+          "ttft_s": 0.5110507000354119,
+          "gen_s": 0.9233848999720067,
+          "total_s": 1.4345667000161484,
+          "gen_tokens": 128,
+          "prompt_tokens": 2470,
+          "token_source": "usage",
+          "server_pp_tps": 5135.348663146076,
+          "server_gen_tps": 138.39992388004185,
+          "finish_reason": "length",
+          "text_chars": 562,
+          "pp_tps": 4833.1799561743055,
+          "gen_tps": 137.53744511508702
+        },
+        {
+          "ttft_s": 0.5494671000051312,
+          "gen_s": 0.9265937999589369,
+          "total_s": 1.476398299972061,
+          "gen_tokens": 128,
+          "prompt_tokens": 2471,
+          "token_source": "usage",
+          "server_pp_tps": 5150.3201494030545,
+          "server_gen_tps": 138.39094577237285,
+          "finish_reason": "length",
+          "text_chars": 475,
+          "pp_tps": 4497.084538777525,
+          "gen_tps": 137.06113725952858
+        },
+        {
+          "ttft_s": 0.5516602999996394,
+          "gen_s": 0.9248804000089876,
+          "total_s": 1.476723400002811,
+          "gen_tokens": 128,
+          "prompt_tokens": 2469,
+          "token_source": "usage",
+          "server_pp_tps": 5134.208928408042,
+          "server_gen_tps": 138.2765769201269,
+          "finish_reason": "length",
+          "text_chars": 552,
+          "pp_tps": 4475.580352622101,
+          "gen_tps": 137.31505176103403
+        }
+      ],
+      "median": {
+        "prompt_tokens": 2470,
+        "gen_tokens": 128,
+        "ttft_ms": 549.4671000051312,
+        "pp_tps": 4497.084538777525,
+        "gen_tps": 137.31505176103403,
+        "server_pp_tps": 5135.348663146076,
+        "server_gen_tps": 138.39094577237285
+      }
+    }
+  ],
+  "summary": {
+    "gen_tps": 141.85679417917228,
+    "pp_tps": 4497.084538777525,
+    "ttft_ms": 37.532899994403124,
+    "gen_case": "short",
+    "pp_case": "long"
+  },
+  "warnings": []
+}

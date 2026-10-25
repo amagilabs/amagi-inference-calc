@@ -209,7 +209,7 @@ def cmd_office(a) -> int:
             setup = (f"{r['gpu_count']}x " if r["gpu_count"] > 1 else "") + r["gpu"]
             if any(r["warnings"]) and not all(w.startswith(("multi-GPU", "more than 8")) for w in r["warnings"]):
                 setup += " *"
-            out.append([m.id, setup, f"{r['vram_needed_gib']:.0f}/{r['vram_total_gib']:.0f} GiB",
+            out.append([m.id, setup, f"{r['vram_needed_gib']:.1f}/{r['vram_total_gib']:.0f} GiB",
                         _num(r["tok_s_per_user"]), _num(r["tok_s_total"], "{:,.0f}"),
                         _usd(r["price_usd"]), _num(r["usd_per_tok_s"], "${:,.2f}")])
     print(_table(out, ["model", "setup", "memory", "tok/s each", "total", "price", "$ per tok/s"], left=2))
