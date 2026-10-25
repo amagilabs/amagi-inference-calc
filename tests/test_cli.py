@@ -34,6 +34,19 @@ def test_estimate_json_and_price_override(capsys):
     assert d["usd_per_tok_s"] == pytest.approx(1000 / d["tok_s_total"], rel=1e-3)
 
 
+def test_price_override_label_and_short_names(capsys, tmp_path):
+    code, out, _ = run(capsys, "estimate", "qwen3-14b", "-g", "3090", "--price", "3090=900")
+    assert code == 0 and "$900 (your price)" in out
+    csv = tmp_path / "p.csv"
+    csv.write_text("gpu,usd\nrtx-3090,800\n", encoding="utf-8")
+    code, out, _ = run(capsys, "estimate", "qwen3-14b", "-g", "rtx-3090", "--prices", str(csv))
+    assert code == 0 and "$800 (your price)" in out
+    code, out, _ = run(capsys, "estimate", "qwen3-14b", "-g", "rtx-3090")
+    assert "(used, " in out
+    code, _, err = run(capsys, "estimate", "qwen3-14b", "-g", "rtx-3090", "--price", "nosuchcard=5")
+    assert code != 0 and "nosuchcard" in err
+
+
 def test_estimate_custom_card(capsys):
     code, out, _ = run(capsys, "estimate", "qwen3-8b", "--vram", "20", "--bw", "500", "--json")
     d = json.loads(out)

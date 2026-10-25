@@ -73,7 +73,9 @@ def _gpu_from_args(a) -> S.GPU:
 
 
 def _prices(a) -> dict:
-    return P.parse_overrides(getattr(a, "price_pair", None) or (), getattr(a, "prices", None))
+    raw = P.parse_overrides(getattr(a, "price_pair", None) or (), getattr(a, "prices", None))
+    # accept the same short names as --gpu ("3090" -> rtx-3090); an unknown name is an error, not a no-op
+    return {S.find_gpu(k).id: v for k, v in raw.items()}
 
 
 def _calibration(a) -> S.Calibration:
@@ -111,7 +113,7 @@ def _add_load_args(p: argparse.ArgumentParser) -> None:
 
 # -- commands -------------------------------------------------------------------
 
-def _print_estimate(e: S.Estimate, model_name: str, gpu: S.GPU) -> None:
+def _print_estimate(e: S.Estimate, model_name: str, gpu: S.GPU, own_price: bool = False) -> None:
     cards = f"{e.gpu_count}x " if e.gpu_count > 1 else ""
     print(f"{model_name} ({e.quant}) on {cards}{gpu.name}")
     print(f"  load       {e.users} user(s) at once, {e.context:,}-token context each")
@@ -133,7 +135,7 @@ def _print_estimate(e: S.Estimate, model_name: str, gpu: S.GPU) -> None:
         print("  prompt     not estimated for this GPU (pass --tflops to add it)")
     print(f"  bandwidth  {e.bandwidth_gbs:.0f} GB/s effective ({e.bandwidth_source})")
     if e.price_usd is not None:
-        src = f"used, {P.price_date()}" if gpu.price_source else "your price"
+        src = f"used, {P.price_date()}" if gpu.price_source and not own_price else "your price"
         per = f" -> ${e.usd_per_tok_s:,.2f} per tok/s" if e.usd_per_tok_s else ""
         print(f"  price      {_usd(e.price_usd)} ({src}){per}")
     for w in e.warnings:
@@ -149,7 +151,7 @@ def cmd_estimate(a) -> int:
                    gpu_count=a.gpus, kv_type=a.kv, tflops=a.tflops, price=price, cal=_calibration(a))
     if _emit(e.to_dict(), a.json):
         return 0
-    _print_estimate(e, model.name, gpu)
+    _print_estimate(e, model.name, gpu, own_price=a.usd is not None or gpu.id in pr)
     return 0
 
 
