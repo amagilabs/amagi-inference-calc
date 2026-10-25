@@ -1,0 +1,18 @@
+{
+ "gpu": "rtx-3090",
+ "bw_ref_gbs": 737.8,
+ "bw_spec_gbs": 936.0,
+ "bw_eff_gbs": 758.0187,
+ "overhead_ms": 1.2917,
+ "moe_layer_ms": 0.0503,
+ "batch_ms_per_b_dense": 0.0295,
+ "batch_ms_per_layer_moe": 0.0577,
+ "tflops_dense": 67.7895,
+ "tflops_moe": 29.3652,
+ "notes": [
+  "Fitted by speed.fit() from measurements.json (role=fit rows only); regenerate with `amagi-inference-calc calibrate --refit`.",
+  "Decode bandwidth is ~1.03x the memtest_vulkan read/write figure (737.8 GB/s) and 0.81x the 936 GB/s spec.",
+  "Dense batching cost is derived from prefill FLOPs, not measured. MoE prefill is rough (held-out error up to ~60%)."
+ ],
+ "_about": "Speed-model constants for one RTX 3090 (300 W limit, llama.cpp CUDA, f16 KV)."
+}

@@ -29,6 +29,7 @@ class ModelSpec:
     full_attn_layers: int = 0        # attention layers whose KV grows with context
     window_attn_layers: int = 0      # sliding-window layers (KV capped at `window`)
     window: int = 0
+    attn_heads: int = 0              # query heads (for attention FLOPs)
     kv_heads: int = 0
     head_dim_k: int = 0
     head_dim_v: int = 0
@@ -216,6 +217,7 @@ def from_hf_config(config: Dict[str, Any], model_id: str = "custom", name: str =
         full_attn_layers=full,
         window_attn_layers=win,
         window=window,
+        attn_heads=heads,
         kv_heads=kv_heads,
         head_dim_k=head_dim,
         head_dim_v=head_dim,
@@ -270,6 +272,7 @@ def from_gguf(info: Any) -> ModelSpec:
         full_attn_layers=full,
         window_attn_layers=win,
         window=window if win else 0,
+        attn_heads=n_head,
         kv_heads=int(kv),
         head_dim_k=k_len,
         head_dim_v=v_len,

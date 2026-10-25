@@ -23,7 +23,8 @@
    "file_quant": "Q4_K_M",
    "file_bytes": 4683074240,
    "read_bytes": 4370558976,
-   "notes": []
+   "notes": [],
+   "attn_heads": 28
   },
   {
    "id": "qwen2.5-32b",
@@ -47,7 +48,8 @@
    "file_quant": "Q4_K_M",
    "file_bytes": 19851336576,
    "read_bytes": 19407413248,
-   "notes": []
+   "notes": [],
+   "attn_heads": 40
   },
   {
    "id": "qwen3.8-27b",
@@ -73,7 +75,8 @@
    "read_bytes": 15387273216,
    "notes": [
     "1 MTP (nextn) block(s) excluded from per-token reads"
-   ]
+   ],
+   "attn_heads": 24
   },
   {
    "id": "qwen3.6-35b-a3b",
@@ -97,7 +100,8 @@
    "file_quant": "Q4_K_M",
    "file_bytes": 22134528992,
    "read_bytes": 2626185728,
-   "notes": []
+   "notes": [],
+   "attn_heads": 16
   },
   {
    "id": "llama-3.1-8b",
@@ -112,6 +116,7 @@
    "full_attn_layers": 32,
    "window_attn_layers": 0,
    "window": 0,
+   "attn_heads": 32,
    "kv_heads": 8,
    "head_dim_k": 128,
    "head_dim_v": 128,
@@ -138,6 +143,7 @@
    "full_attn_layers": 36,
    "window_attn_layers": 0,
    "window": 0,
+   "attn_heads": 32,
    "kv_heads": 8,
    "head_dim_k": 128,
    "head_dim_v": 128,
@@ -164,6 +170,7 @@
    "full_attn_layers": 8,
    "window_attn_layers": 40,
    "window": 1024,
+   "attn_heads": 16,
    "kv_heads": 8,
    "head_dim_k": 256,
    "head_dim_v": 256,
@@ -190,6 +197,7 @@
    "full_attn_layers": 48,
    "window_attn_layers": 0,
    "window": 0,
+   "attn_heads": 40,
    "kv_heads": 8,
    "head_dim_k": 128,
    "head_dim_v": 128,
@@ -216,6 +224,7 @@
    "full_attn_layers": 40,
    "window_attn_layers": 0,
    "window": 0,
+   "attn_heads": 40,
    "kv_heads": 8,
    "head_dim_k": 128,
    "head_dim_v": 128,
@@ -242,6 +251,7 @@
    "full_attn_layers": 40,
    "window_attn_layers": 0,
    "window": 0,
+   "attn_heads": 40,
    "kv_heads": 10,
    "head_dim_k": 128,
    "head_dim_v": 128,
@@ -268,6 +278,7 @@
    "full_attn_layers": 12,
    "window_attn_layers": 12,
    "window": 128,
+   "attn_heads": 64,
    "kv_heads": 8,
    "head_dim_k": 64,
    "head_dim_v": 64,
@@ -294,6 +305,7 @@
    "full_attn_layers": 40,
    "window_attn_layers": 0,
    "window": 0,
+   "attn_heads": 32,
    "kv_heads": 8,
    "head_dim_k": 128,
    "head_dim_v": 128,
@@ -320,6 +332,7 @@
    "full_attn_layers": 10,
    "window_attn_layers": 52,
    "window": 1024,
+   "attn_heads": 32,
    "kv_heads": 16,
    "head_dim_k": 128,
    "head_dim_v": 128,
@@ -346,6 +359,7 @@
    "full_attn_layers": 48,
    "window_attn_layers": 0,
    "window": 0,
+   "attn_heads": 32,
    "kv_heads": 4,
    "head_dim_k": 128,
    "head_dim_v": 128,
@@ -372,6 +386,7 @@
    "full_attn_layers": 64,
    "window_attn_layers": 0,
    "window": 0,
+   "attn_heads": 64,
    "kv_heads": 8,
    "head_dim_k": 128,
    "head_dim_v": 128,
@@ -398,6 +413,7 @@
    "full_attn_layers": 80,
    "window_attn_layers": 0,
    "window": 0,
+   "attn_heads": 64,
    "kv_heads": 8,
    "head_dim_k": 128,
    "head_dim_v": 128,
@@ -424,6 +440,7 @@
    "full_attn_layers": 80,
    "window_attn_layers": 0,
    "window": 0,
+   "attn_heads": 64,
    "kv_heads": 8,
    "head_dim_k": 128,
    "head_dim_v": 128,
@@ -450,6 +467,7 @@
    "full_attn_layers": 18,
    "window_attn_layers": 18,
    "window": 128,
+   "attn_heads": 64,
    "kv_heads": 8,
    "head_dim_k": 64,
    "head_dim_v": 64,

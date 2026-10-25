@@ -1,0 +1,279 @@
+{
+ "_about": "Every number the speed model is fitted to or checked against. All runs: one GeForce RTX 3090 24GB at a 300 W power limit, all layers on the GPU, f16 KV cache. 'fit' rows set the calibration; 'backtest' rows are held out and only used to report error.",
+ "gpu": "rtx-3090",
+ "kv_type": "F16",
+ "points": [
+  {
+   "kind": "decode",
+   "model": "qwen2.5-7b",
+   "quant": "Q4_K_M",
+   "context": 198,
+   "streams": 1,
+   "tok_s": 141.86,
+   "role": "fit",
+   "source": "amagi-tokbench 0.1.0 run, llama.cpp server b11753, 2026-10-24 (median of 3)"
+  },
+  {
+   "kind": "decode",
+   "model": "qwen2.5-7b",
+   "quant": "Q4_K_M",
+   "context": 701,
+   "streams": 1,
+   "tok_s": 140.9,
+   "role": "fit",
+   "source": "amagi-tokbench 0.1.0 run, llama.cpp server b11753, 2026-10-24 (median of 3)"
+  },
+  {
+   "kind": "decode",
+   "model": "qwen2.5-7b",
+   "quant": "Q4_K_M",
+   "context": 2534,
+   "streams": 1,
+   "tok_s": 137.3,
+   "role": "fit",
+   "source": "amagi-tokbench 0.1.0 run, llama.cpp server b11753, 2026-10-24 (median of 3)"
+  },
+  {
+   "kind": "decode",
+   "model": "qwen2.5-32b",
+   "quant": "Q4_K_M",
+   "context": 197,
+   "streams": 1,
+   "tok_s": 37.04,
+   "role": "fit",
+   "source": "amagi-tokbench 0.1.0 run, llama.cpp server b11753, 2026-10-24 (median of 3)"
+  },
+  {
+   "kind": "decode",
+   "model": "qwen2.5-32b",
+   "quant": "Q4_K_M",
+   "context": 700,
+   "streams": 1,
+   "tok_s": 36.8,
+   "role": "fit",
+   "source": "amagi-tokbench 0.1.0 run, llama.cpp server b11753, 2026-10-24 (median of 3)"
+  },
+  {
+   "kind": "decode",
+   "model": "qwen2.5-32b",
+   "quant": "Q4_K_M",
+   "context": 2535,
+   "streams": 1,
+   "tok_s": 36.1,
+   "role": "fit",
+   "source": "amagi-tokbench 0.1.0 run, llama.cpp server b11753, 2026-10-24 (median of 3)"
+  },
+  {
+   "kind": "decode",
+   "model": "qwen3.6-35b-a3b",
+   "quant": "Q4_K_M",
+   "context": 300,
+   "streams": 1,
+   "tok_s": 148.7,
+   "role": "fit",
+   "source": "agent-eval run, llama.cpp server -fa on, 64K context, 2026-10-23 (median of 3)"
+  },
+  {
+   "kind": "decode",
+   "model": "qwen3.6-35b-a3b",
+   "quant": "Q4_K_M",
+   "context": 41782,
+   "streams": 1,
+   "tok_s": 125.8,
+   "role": "fit",
+   "source": "agent-eval run, llama.cpp server -fa on, 64K context, 2026-10-23 (median of 3)"
+  },
+  {
+   "kind": "decode",
+   "model": "qwen3.8-27b",
+   "quant": "Q4_K_M",
+   "context": 300,
+   "streams": 1,
+   "tok_s": 42.8,
+   "role": "backtest",
+   "source": "agent-eval run, llama.cpp server -fa on, 64K context, 2026-10-23 (median of 3)"
+  },
+  {
+   "kind": "decode",
+   "model": "qwen3.8-27b",
+   "quant": "Q4_K_M",
+   "context": 41782,
+   "streams": 1,
+   "tok_s": 37.6,
+   "role": "backtest",
+   "source": "agent-eval run, llama.cpp server -fa on, 64K context, 2026-10-23 (median of 3)"
+  },
+  {
+   "kind": "decode",
+   "model": "gpt-oss-20b",
+   "quant": "MXFP4",
+   "context": 361,
+   "streams": 1,
+   "tok_s": 186.3,
+   "role": "backtest",
+   "source": "agent-eval throughput run, llama.cpp server -fa on, 64K context, 2026-10-23 (median of 3)"
+  },
+  {
+   "kind": "decode",
+   "model": "gpt-oss-20b",
+   "quant": "MXFP4",
+   "context": 9435,
+   "streams": 1,
+   "tok_s": 176.4,
+   "role": "backtest",
+   "source": "agent-eval throughput run, llama.cpp server -fa on, 64K context, 2026-10-23 (median of 3)"
+  },
+  {
+   "kind": "decode",
+   "model": "gpt-oss-20b",
+   "quant": "MXFP4",
+   "context": 37462,
+   "streams": 1,
+   "tok_s": 153.5,
+   "role": "backtest",
+   "source": "agent-eval throughput run, llama.cpp server -fa on, 64K context, 2026-10-23 (median of 3)"
+  },
+  {
+   "kind": "decode",
+   "model": "gpt-oss-20b",
+   "quant": "MXFP4",
+   "context": 15872,
+   "streams": 1,
+   "tok_s": 169.0,
+   "role": "backtest",
+   "source": "agent-eval long-context run, 2026-10-23 (single run)"
+  },
+  {
+   "kind": "decode",
+   "model": "gpt-oss-20b",
+   "quant": "MXFP4",
+   "context": 31832,
+   "streams": 1,
+   "tok_s": 155.9,
+   "role": "backtest",
+   "source": "agent-eval long-context run, 2026-10-23 (single run)"
+  },
+  {
+   "kind": "decode",
+   "model": "gpt-oss-20b",
+   "quant": "MXFP4",
+   "context": 56435,
+   "streams": 1,
+   "tok_s": 139.6,
+   "role": "backtest",
+   "source": "agent-eval long-context run, 2026-10-23 (single run)"
+  },
+  {
+   "kind": "decode",
+   "model": "qwen3.6-35b-a3b",
+   "quant": "Q4_K_M",
+   "context": 2600,
+   "streams": 4,
+   "tok_s": 66.4,
+   "role": "fit",
+   "source": "agent-eval concurrency run, llama.cpp server -np 8 --kv-unified, 2026-10-23 (mean of 2 rounds)"
+  },
+  {
+   "kind": "decode",
+   "model": "qwen3.6-35b-a3b",
+   "quant": "Q4_K_M",
+   "context": 2600,
+   "streams": 8,
+   "tok_s": 31.95,
+   "role": "fit",
+   "source": "agent-eval concurrency run, llama.cpp server -np 8 --kv-unified, 2026-10-23 (mean of 2 rounds)"
+  },
+  {
+   "kind": "decode",
+   "model": "gpt-oss-20b",
+   "quant": "MXFP4",
+   "context": 2400,
+   "streams": 4,
+   "tok_s": 79.1,
+   "role": "backtest",
+   "source": "agent-eval concurrency run, llama.cpp server -np 8 --kv-unified, 2026-10-23 (mean of 2 rounds)"
+  },
+  {
+   "kind": "decode",
+   "model": "gpt-oss-20b",
+   "quant": "MXFP4",
+   "context": 2400,
+   "streams": 8,
+   "tok_s": 41.85,
+   "role": "backtest",
+   "source": "agent-eval concurrency run, llama.cpp server -np 8 --kv-unified, 2026-10-23 (mean of 2 rounds)"
+  },
+  {
+   "kind": "prefill",
+   "model": "qwen2.5-7b",
+   "quant": "Q4_K_M",
+   "prompt": 2470,
+   "tok_s": 4497.1,
+   "role": "fit",
+   "source": "amagi-tokbench 0.1.0 run, llama.cpp server b11753, 2026-10-24 (median of 3)"
+  },
+  {
+   "kind": "prefill",
+   "model": "qwen2.5-32b",
+   "quant": "Q4_K_M",
+   "prompt": 2471,
+   "tok_s": 1063.5,
+   "role": "fit",
+   "source": "amagi-tokbench 0.1.0 run, llama.cpp server b11753, 2026-10-24 (median of 3)"
+  },
+  {
+   "kind": "prefill",
+   "model": "qwen3.8-27b",
+   "quant": "Q4_K_M",
+   "prompt": 41782,
+   "tok_s": 1201,
+   "role": "backtest",
+   "source": "agent-eval run, llama.cpp server -fa on, 64K context, 2026-10-23 (median of 3)"
+  },
+  {
+   "kind": "prefill",
+   "model": "qwen3.6-35b-a3b",
+   "quant": "Q4_K_M",
+   "prompt": 41782,
+   "tok_s": 3049,
+   "role": "fit",
+   "source": "agent-eval run, llama.cpp server -fa on, 64K context, 2026-10-23 (median of 3)"
+  },
+  {
+   "kind": "prefill",
+   "model": "qwen3.6-35b-a3b",
+   "quant": "Q4_K_M",
+   "prompt": 2388,
+   "tok_s": 3004,
+   "role": "backtest",
+   "source": "agent-eval concurrency run, llama.cpp server -np 8 --kv-unified, 2026-10-23 (mean of 2 rounds), prompt/TTFT at 1 user"
+  },
+  {
+   "kind": "prefill",
+   "model": "gpt-oss-20b",
+   "quant": "MXFP4",
+   "prompt": 37334,
+   "tok_s": 4307,
+   "role": "fit",
+   "source": "agent-eval throughput run, llama.cpp server -fa on, 64K context, 2026-10-23 (mean of 2)"
+  },
+  {
+   "kind": "prefill",
+   "model": "gpt-oss-20b",
+   "quant": "MXFP4",
+   "prompt": 9307,
+   "tok_s": 5321,
+   "role": "backtest",
+   "source": "agent-eval throughput run, llama.cpp server -fa on, 64K context, 2026-10-23 (median of 3)"
+  },
+  {
+   "kind": "prefill",
+   "model": "gpt-oss-20b",
+   "quant": "MXFP4",
+   "prompt": 56435,
+   "tok_s": 3706,
+   "role": "backtest",
+   "source": "agent-eval long-context run, 2026-10-23 (single run)"
+  }
+ ]
+}
