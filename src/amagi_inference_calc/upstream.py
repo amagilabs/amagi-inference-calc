@@ -4,7 +4,7 @@ Based on web/src/calculations.ts from llm-inference-calculator by Alex
 Ziskind (MIT). Kept line-for-line so `amagi-inference-calc vram` gives the
 same answer as the upstream web app; tests/test_upstream_parity.py checks it
 against the TypeScript running under node. The architecture-aware estimate
-lives in memory.py.
+lives in models.py and speed.py.
 """
 
 from __future__ import annotations
