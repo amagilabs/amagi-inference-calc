@@ -1,0 +1,17 @@
+{
+ "_about": "Small-office starting points. 'users' is how many people send a request at the same moment, not head count; the presets assume about a quarter to a third of staff hit enter at the same moment, so change users to match your office. 'context' is the window each user gets; 'prompt' is a typical request size.",
+ "presets": [
+  {"id": "solo", "name": "Solo / owner", "staff": 1, "users": 1, "context": 8192, "prompt": 1500,
+   "use": "drafting emails, quick questions, summarizing a page or two"},
+  {"id": "team-5", "name": "5-person office", "staff": 5, "users": 2, "context": 8192, "prompt": 2000,
+   "use": "shared chat assistant, email drafts, meeting notes"},
+  {"id": "team-10", "name": "10-person office", "staff": 10, "users": 3, "context": 16384, "prompt": 3000,
+   "use": "shared assistant plus longer documents"},
+  {"id": "team-25", "name": "25-person office", "staff": 25, "users": 6, "context": 16384, "prompt": 3000,
+   "use": "everyone has a chat window open during the day"},
+  {"id": "doc-review", "name": "Document review (law, accounting)", "staff": 5, "users": 2, "context": 32768, "prompt": 20000,
+   "use": "reading whole contracts, leases, or statements of 30-60 pages"},
+  {"id": "coding", "name": "Small dev team", "staff": 4, "users": 2, "context": 32768, "prompt": 12000,
+   "use": "code assistant with a few files in context"}
+ ]
+}

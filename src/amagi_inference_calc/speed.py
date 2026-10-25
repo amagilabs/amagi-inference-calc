@@ -68,6 +68,9 @@ class GPU:
     price_source: Optional[str] = None
     memory_gb: Optional[float] = None
     tflops: Optional[float] = None  # effective prefill TFLOPS, if known
+    bw_decode_gbs: Optional[float] = None  # decode bandwidth fitted from your own run
+    vram_note: Optional[str] = None
+    note: Optional[str] = None
 
     @property
     def vram_bytes(self) -> float:
@@ -85,9 +88,9 @@ def find_gpu(key: str) -> GPU:
     for g in gpus:
         if g.id == k:
             return g
-    hits = [g for g in gpus if k in g.id or key.lower() in g.name.lower()]
-    if len(hits) == 1:
-        return hits[0]
+    hits = sorted((g for g in gpus if k in g.id or key.lower() in g.name.lower()), key=lambda g: len(g.id))
+    if len(hits) == 1 or (hits and all(h.id.startswith(hits[0].id) for h in hits)):
+        return hits[0]  # "3090" means rtx-3090, not rtx-3090-ti
     if hits:
         raise KeyError(f"{key!r} matches several GPUs: {', '.join(g.id for g in hits)}")
     raise KeyError(f"unknown GPU {key!r}; run `amagi-inference-calc gpus` for the list")
@@ -108,11 +111,13 @@ def load_calibration() -> Calibration:
 
 def _bandwidth(gpu: GPU, cal: Calibration) -> Tuple[float, str]:
     """Effective decode bandwidth (bytes/s) and where it came from."""
+    if gpu.bw_decode_gbs:
+        return gpu.bw_decode_gbs * 1e9, "fitted from your benchmark run"
     if gpu.id == cal.gpu:
         return cal.bw_eff_gbs * 1e9, "calibrated on this GPU"
     if gpu.bw_measured_gbs:
         scale = cal.bw_eff_gbs / cal.bw_ref_gbs
-        return gpu.bw_measured_gbs * scale * 1e9, "measured bandwidth"
+        return gpu.bw_measured_gbs * scale * 1e9, f"memtest {gpu.bw_measured_gbs:g} GB/s x {scale:.2f}"
     return gpu.bw_spec_gbs * cal.decode_eff * 1e9, f"spec x {cal.decode_eff:.2f}"
 
 
@@ -223,6 +228,8 @@ def estimate(
         warnings.append(f"does not fit: needs {need / GIB:.1f} GiB, has {total / GIB:.1f} GiB ({cards} card(s) needed)")
     if gpu_count > 1:
         warnings.append("multi-GPU assumes llama.cpp layer split: memory adds up, speed does not (cards take turns)")
+    if gpu.note:
+        warnings.append(gpu.note)
     if gpu.vendor in ("amd", "intel", "apple"):
         warnings.append(f"{gpu.vendor.upper()} speed is scaled from an NVIDIA/CUDA calibration; real numbers often land lower")
 
@@ -366,3 +373,39 @@ def backtest(cal: Optional[Calibration] = None, role: Optional[str] = None) -> L
             "error_pct": round((pred - p["tok_s"]) / p["tok_s"] * 100, 1),
         })
     return rows
+
+
+def decode_bw_from_runs(model: ModelSpec, quant: str, runs: Sequence[Tuple[int, float]],
+                        cal: Optional[Calibration] = None, kv_type: str = "F16") -> float:
+    """Effective decode bandwidth (GB/s) that explains measured single-user runs.
+
+    `runs` is a list of (context_tokens, decode_tok_s). Each run is solved
+    for bandwidth with the calibrated step overhead held fixed; the median
+    is returned.
+    """
+    cal = cal or load_calibration()
+    fixed = cal.overhead_ms / 1e3 + cal.moe_layer_ms / 1e3 * _moe_layers(model)
+    vals = []
+    for ctx, tok_s in runs:
+        mem = model.read_bytes_per_step(quant) + model.kv_bytes(ctx, kv_type)
+        t = 1.0 / tok_s - fixed
+        if t > 0:
+            vals.append(mem / t / 1e9)
+    if not vals:
+        raise ValueError("no usable runs (decode faster than the fixed step overhead?)")
+    vals.sort()
+    mid = len(vals) // 2
+    return vals[mid] if len(vals) % 2 else (vals[mid - 1] + vals[mid]) / 2
+
+
+def tokbench_runs(report: dict) -> List[Tuple[int, float]]:
+    """(context, decode tok/s) pairs from an amagi-tokbench JSON report."""
+    out = []
+    for case in report.get("cases", []):
+        med = case.get("median") or {}
+        tps = med.get("server_gen_tps") or med.get("gen_tps")
+        if not tps or case.get("concurrency", 1) not in (1, None):
+            continue
+        ctx = int(med.get("prompt_tokens", 0) + med.get("gen_tokens", 0) / 2)
+        out.append((ctx, float(tps)))
+    return out
