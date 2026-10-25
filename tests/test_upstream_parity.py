@@ -2,7 +2,7 @@
 
 Runs web/src/calculations.ts (from llm-inference-calculator by Alex
 Ziskind, MIT) under node's type stripping and compares every case.
-Skipped unless node >= 22.6 is on PATH or the web/ folder is not around (sdist installs).
+Skipped when node >= 22.6 is missing or the web/ folder is not around (sdist installs).
 """
 
 import itertools
