@@ -1,0 +1,84 @@
+Script started on 2026-10-21 11:33:29+00:00 [COMMAND="./memtest_vulkan" <not executed on terminal>]
+https://github.com/GpuZelenograd/[32mmemtest_vulkan v0.6.0 by GpuZelenograd
+[m[34h[?25hTo finish testing use Ctrl+C
+
+1: Bus=0x01:00 DevId=0x2204   24GB NVIDIA GeForce RTX 3090
+2: Bus=0x00:00 DevId=0x0000   32GB llvmpipe (LLVM 20.1.2, 256 bits)
+
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+[K(first device will be autoselected in 0 seconds)   Override index to test:
+    ...first device autoselected
+[34h[?25hStandard 5-minute test of 1: Bus=0x01:00 DevId=0x2204   24GB NVIDIA GeForce RTX 3090
+          NO ERRORS           written:   18.8GB  785.6GB/s      checked:   22.5GB  752.8GB/s     00:00:00.053
+          NO ERRORS           written:  337.5GB  716.4GB/s      checked:  405.0GB  742.4GB/s     00:00:01.070
+          NO ERRORS           written: 1668.8GB  714.4GB/s      checked: 2002.5GB  742.0GB/s     00:00:06.105
+          NO ERRORS           written: 9956.2GB  713.1GB/s      checked:11947.5GB  742.3GB/s     00:00:36.161
+          NO ERRORS           written: 9900.0GB  707.6GB/s      checked:11880.0GB  740.2GB/s     00:01:06.201
+          NO ERRORS           written: 9843.8GB  703.0GB/s      checked:11812.5GB  738.3GB/s     00:01:36.205
+          NO ERRORS           written: 9843.8GB  702.2GB/s      checked:11812.5GB  738.6GB/s     00:02:06.216
+          NO ERRORS           written: 9825.0GB  700.2GB/s      checked:11790.0GB  738.0GB/s     00:02:36.224
+          NO ERRORS           written: 9843.8GB  701.1GB/s      checked:11812.5GB  738.1GB/s     00:03:06.270
+          NO ERRORS           written: 9862.5GB  703.1GB/s      checked:11835.0GB  738.9GB/s     00:03:36.314
+          NO ERRORS           written: 9862.5GB  704.1GB/s      checked:11835.0GB  739.0GB/s     00:04:06.336
+          NO ERRORS           written: 9881.2GB  705.9GB/s      checked:11857.5GB  739.1GB/s     00:04:36.378
+Standard 5-minute test PASSed! Just press Ctrl+C unless you plan long test run.
+Extended endless test started; testing more than 2 hours is usually unneeded
+use Ctrl+C to stop it when you decide it's enough
+          NO ERRORS           written: 9843.8GB  701.7GB/s      checked:11812.5GB  738.3GB/s     00:05:51.412
+          NO ERRORS           written: 9843.8GB  701.0GB/s      checked:11812.5GB  739.1GB/s     00:06:21.438
+          NO ERRORS           written: 9843.8GB  701.6GB/s      checked:11812.5GB  738.2GB/s     00:06:51.470
+          NO ERRORS           written: 9862.5GB  703.1GB/s      checked:11835.0GB  738.9GB/s     00:07:21.515
+          NO ERRORS           written: 9862.5GB  703.8GB/s      checked:11835.0GB  739.4GB/s     00:07:51.535
+          NO ERRORS           written: 9862.5GB  704.3GB/s      checked:11835.0GB  739.7GB/s     00:08:21.539
+          NO ERRORS           written: 9881.2GB  705.3GB/s      checked:11857.5GB  739.2GB/s     00:08:51.590
+          NO ERRORS           written: 9881.2GB  706.6GB/s      checked:11857.5GB  739.4GB/s     00:09:21.610
+          NO ERRORS           written: 9900.0GB  707.7GB/s      checked:11880.0GB  740.1GB/s     00:09:51.652
+          NO ERRORS           written: 9900.0GB  707.3GB/s      checked:11880.0GB  740.4GB/s     00:10:21.696
+          NO ERRORS           written: 9881.2GB  707.3GB/s      checked:11857.5GB  739.5GB/s     00:10:51.701
+          NO ERRORS           written: 9900.0GB  706.7GB/s      checked:11880.0GB  740.2GB/s     00:11:21.759
+          NO ERRORS           written: 9900.0GB  707.2GB/s      checked:11880.0GB  740.5GB/s     00:11:51.803
+          NO ERRORS           written: 9881.2GB  706.2GB/s      checked:11857.5GB  740.1GB/s     00:12:21.817
+          NO ERRORS           written: 9881.2GB  705.9GB/s      checked:11857.5GB  739.3GB/s     00:12:51.854
+          NO ERRORS           written: 9881.2GB  705.7GB/s      checked:11857.5GB  740.2GB/s     00:13:21.876
+          NO ERRORS           written: 9881.2GB  705.9GB/s      checked:11857.5GB  739.2GB/s     00:13:51.916
+          NO ERRORS           written: 9881.2GB  705.9GB/s      checked:11857.5GB  739.1GB/s     00:14:21.957
+
+Script done on 2026-10-21 11:48:31+00:00 [COMMAND_EXIT_CODE="0"]
